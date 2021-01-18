@@ -21,10 +21,7 @@ public class BookDaoImpl implements BookDao{
     @Override
     @Transactional
     public void save(Book book) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
         entityManager.persist(book);
-        transaction.commit();
     }
 
     @Override

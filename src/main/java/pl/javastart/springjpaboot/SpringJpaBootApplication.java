@@ -17,7 +17,10 @@ public class SpringJpaBootApplication {
         //zapis
         Book book = new Book("12345678", "Spring is ok", "Java start");
         bookDao.save(book);
-        System.out.println("elo------------------------");
+
+        //odczyt
+        Book book1 = bookDao.get(1L);
+        System.out.println(book1);
 
         Thread.sleep(5000);
     }
