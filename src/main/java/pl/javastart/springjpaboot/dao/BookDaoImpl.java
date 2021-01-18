@@ -3,10 +3,8 @@ package pl.javastart.springjpaboot.dao;
 import org.springframework.stereotype.Repository;
 import pl.javastart.springjpaboot.model.Book;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 
 // to samo co component - spring dodaje go do
 // konteneru i mozemy go pobierac do zaleznosci
@@ -14,29 +12,24 @@ import javax.persistence.PersistenceUnit;
 public class BookDaoImpl implements BookDao{
 
     // automatycznie wstrzykiwana zależność
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public BookDaoImpl() {
     }
 
     @Override
+    @Transactional
     public void save(Book book) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-
         entityManager.persist(book);
-
         transaction.commit();
-        entityManager.close();
     }
 
     @Override
     public Book get(Long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         Book book = entityManager.find(Book.class, id);
-        entityManager.close();
         return book;
     }
 }
