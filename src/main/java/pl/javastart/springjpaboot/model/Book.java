@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "books") // taka adnotacja pozwala nam na wrzucenie osobnej nazwy indywidaunej do DB. Ułatwia to prace z tabelami typu t_tds_vdi_t_cards_pl
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -13,6 +14,7 @@ public class Book implements Serializable {
 IDENTITY - klucz generowany jest po stronie bazy danych na podstawie kolumny o automatycznej inkrementacji wartości. W przypadku MySQL kolumna taka posiada własność auto_increment.
 SEQUENCE - klucz generowany jest po stronie bazy danych z wykorzystaniem sekwencji
 TABLE - klucz generowany z pomocą dodatkowej tabeli zarządzaną przez providera JPA. W przypadku Hibernate tabela ta nazywa się domyślnie hibernate_sequence*/
+    @Column(name = "book_id") // nadawanie indywudualnej nazwy na kolumny w celu unikniecia dbilnch nazw typu id_t_vds_column_I_pl
     private Long id;
     private String isbn;
     @Transient
