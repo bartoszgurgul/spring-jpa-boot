@@ -24,6 +24,19 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private String author;
 
+    @PrePersist
+    public void prePersist(){
+        System.out.println(">>>> Zapis obiektu " + this.toString());
+    }
+    @PostPersist
+    public void postPersist(){
+        System.out.println("<<<< Zapisano obiekt " + this.toString());
+    }
+    /* pozostałe adnotacje do używania wczasnie zycia encji
+    @PrePersist, @PreUpdate, @PreRemove
+    @PostLoad, @PostPersist, @PostUpdate, @PostRemove
+     */
+
     public Book(){}
 
     public Book(String isbn, String title, String author) {
