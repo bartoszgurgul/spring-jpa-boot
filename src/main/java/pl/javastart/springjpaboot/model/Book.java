@@ -10,15 +10,18 @@ public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    /*AUTO - provider JPA samodzielnie dobiera strategię
-IDENTITY - klucz generowany jest po stronie bazy danych na podstawie kolumny o automatycznej inkrementacji wartości. W przypadku MySQL kolumna taka posiada własność auto_increment.
-SEQUENCE - klucz generowany jest po stronie bazy danych z wykorzystaniem sekwencji
-TABLE - klucz generowany z pomocą dodatkowej tabeli zarządzaną przez providera JPA. W przypadku Hibernate tabela ta nazywa się domyślnie hibernate_sequence*/
+    /*AUTO -    provider JPA samodzielnie dobiera strategię
+    IDENTITY -  klucz generowany jest po stronie bazy danych na podstawie kolumny o automatycznej inkrementacji wartości. W przypadku MySQL kolumna taka posiada własność auto_increment.
+    SEQUENCE -  klucz generowany jest po stronie bazy danych z wykorzystaniem sekwencji
+    TABLE -     klucz generowany z pomocą dodatkowej tabeli zarządzaną przez providera JPA. W przypadku Hibernate tabela ta nazywa się domyślnie hibernate_sequence*/
     @Column(name = "book_id") // nadawanie indywudualnej nazwy na kolumny w celu unikniecia dbilnch nazw typu id_t_vds_column_I_pl
     private Long id;
+    @Column(nullable = false, length = 13, unique = true)
     private String isbn;
-    @Transient
+    //@Transient to by nam oznaczało że ma nie być wrzucony do bazy danych a to juz zle
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String author;
 
     public Book(){}
